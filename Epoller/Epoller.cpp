@@ -6,7 +6,7 @@
 Epoller::Epoller(){
     ep_fd=epoll_create(101);
     events=new epoll_event[MAX_EPOLL_SIZE];
-
+    threadpool=new Threadpool(3);
 }
 
 std::vector<Channel*> Epoller::poll(){
@@ -28,7 +28,7 @@ void Epoller::loop(){
         chs.clear();
         chs=poll();
         for(auto it:chs){
-            it->handleEvent();
+            threadpool->addTask(it->getCallback());
         }
     }
     

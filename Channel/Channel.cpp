@@ -9,7 +9,7 @@ int Channel::getFd(){
     return fd;
 }
 
-void Channel::setCallback(std::function<void()> _callback){
+void Channel::setCallback(std::function<void()>&& _callback){
     callback=_callback;
 }
 
@@ -26,3 +26,7 @@ void Channel::putInEpoll(){
     epoller.get()->add(this);
     printf("put in epoll\n");
 }
+
+std::function<void()> Channel::getCallback(){
+    return callback;
+}   

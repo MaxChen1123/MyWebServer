@@ -16,7 +16,8 @@ class Channel{
     public:
     Channel(int,std::shared_ptr<Epoller>);
     int getFd();
-    void setCallback(std::function<void()>);
+    void setCallback(std::function<void()>&&);
+    std::function<void()> getCallback();
     void handleEvent();
     uint32_t getEvent();
     void putInEpoll();

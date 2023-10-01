@@ -17,6 +17,7 @@ Acceptor::Acceptor(std::shared_ptr<Epoller> _epoller){
 void Acceptor::acceptConnection(){
     InetAddress *addr = new InetAddress();
     Socket *client_socket = new Socket(socket_p.get()->accept(addr));
+    client_socket->setnonblocking();
     Channel *client_channel = new Channel(client_socket->getFd(),epoller);
     //toChange   
     new Connection(client_channel,epoller);

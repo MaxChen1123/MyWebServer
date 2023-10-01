@@ -3,7 +3,7 @@
 Connection::Connection(Channel* _ch,std::shared_ptr<Epoller> _epoller){
     ch = _ch;
     epoller = _epoller;
-    ch->setCallback(std::bind(&Connection::connect, this));
+    ch->setCallback(std::move(std::bind(&Connection::connect, this)));
     ch->putInEpoll();
 }
 
