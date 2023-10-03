@@ -14,10 +14,11 @@ class Channel{
 
     public:
     Channel(int);
-    int getFd();
-    void setCallback(std::function<void()>&&);
-    std::function<void()> getCallback();
     void handleEvent();
+    void setCallback(std::function<void()>&&);
+    void putInEpoll(std::unique_ptr<Epoller>& epoller);
+    std::function<void()> getCallback();
+    int getFd();
     uint32_t getEvent();
-    void putInEpoll(Epoller*);
+    
 };

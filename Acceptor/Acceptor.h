@@ -11,9 +11,10 @@
 class Acceptor{
 public:
     Acceptor();
+    ~Acceptor();
     void acceptConnection();
     void setConnectionCallback(std::function<void(Socket*)> callback);
-    void setChannel(Epoller*);
+    void setChannel(std::unique_ptr<Epoller>&);
 
 private:
     std::unique_ptr<Socket> socket_p;

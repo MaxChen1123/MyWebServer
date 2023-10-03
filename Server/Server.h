@@ -17,7 +17,7 @@ private:
     std::unique_ptr<Epoller> mainepoller;
     std::unordered_map<int, std::unique_ptr<Connection>> connections;
     std::unique_ptr<Threadpool> threadpool;
-    std::vector<std::shared_ptr<Epoller>> subReactors;
+    std::vector<std::unique_ptr<Epoller>> subReactors;
     int threadnum;
 
     void connectionEstablished(Socket*);

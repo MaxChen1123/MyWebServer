@@ -7,11 +7,14 @@
 #include"../Channel/Channel.h"
 #include"../Epoller/Epoller.h"
 
+class Socket;
 class Connection{
 private:
-    Channel* ch;   
+    Channel* ch;
+    Socket* sk;   
 public:
-    Connection(Channel*);
+    Connection(Channel*,Socket*);
+    ~Connection();
     void connect();
-    void setChannel(Epoller*);
+    void setChannel(std::unique_ptr<Epoller>&);
 };

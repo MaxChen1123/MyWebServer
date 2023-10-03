@@ -21,9 +21,9 @@ uint32_t Channel::getEvent(){
     return event;
 }
 
-void Channel::putInEpoll(Epoller*epoller){
+void Channel::putInEpoll(std::unique_ptr<Epoller> &_epoller){
     event=EPOLLIN|EPOLLET;
-    epoller->add(this);
+    _epoller.get()->add(this);
 }
 
 std::function<void()> Channel::getCallback(){

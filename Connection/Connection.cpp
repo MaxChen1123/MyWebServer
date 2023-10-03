@@ -1,8 +1,15 @@
 #include"Connection.h"
+#include"../Socket/Socket.h"
 
-Connection::Connection(Channel* _ch){
+Connection::Connection(Channel* _ch,Socket* _sock){
     ch = _ch;
+    sk=_sock;
     ch->setCallback(std::bind(&Connection::connect, this));
+}
+
+Connection::~Connection(){
+    delete ch;
+    delete sk;
 }
 
 void Connection::connect(){
@@ -31,6 +38,6 @@ void Connection::connect(){
 
 }
 
-void Connection::setChannel(Epoller* _epoller){
+void Connection::setChannel(std::unique_ptr<Epoller>&_epoller){
     ch->putInEpoll(_epoller);
 }

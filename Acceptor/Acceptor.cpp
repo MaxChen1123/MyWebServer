@@ -10,17 +10,22 @@ Acceptor::Acceptor(){
     acceptChannel->setCallback(std::bind(&Acceptor::acceptConnection,this)); 
 }
 
+Acceptor::~Acceptor(){
+    delete acceptChannel;
+}
+
 void Acceptor::acceptConnection(){
     InetAddress *addr = new InetAddress();
     Socket *client_socket = new Socket(socket_p.get()->accept(addr));
     client_socket->setnonblocking();
     connectionCallback(client_socket);
+    delete addr;
 }
 
 void Acceptor::setConnectionCallback(std::function<void(Socket*)> _callback){
     connectionCallback=_callback;
 }
 
-void Acceptor::setChannel(Epoller* _epoller){
+void Acceptor::setChannel(std::unique_ptr<Epoller>& _epoller){
     acceptChannel->putInEpoll(_epoller);
 }
