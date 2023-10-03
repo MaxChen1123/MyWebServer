@@ -28,7 +28,6 @@ void Socket::bind(InetAddress *_addr){
 
 void Socket::listen(){
     ::listen(fd, SOMAXCONN);
-    printf("listen\n");
 }
 void Socket::setnonblocking(){
     fcntl(fd, F_SETFL, fcntl(fd, F_GETFL) | O_NONBLOCK);

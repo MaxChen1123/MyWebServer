@@ -1,8 +1,8 @@
 #include"Channel.h"
 
-Channel::Channel(int _fd,std::shared_ptr<Epoller> _epoller){
+Channel::Channel(int _fd){
     fd=_fd;
-    epoller=_epoller;
+    
 }
 
 int Channel::getFd(){
@@ -21,10 +21,9 @@ uint32_t Channel::getEvent(){
     return event;
 }
 
-void Channel::putInEpoll(){
+void Channel::putInEpoll(Epoller*epoller){
     event=EPOLLIN|EPOLLET;
-    epoller.get()->add(this);
-    printf("put in epoll\n");
+    epoller->add(this);
 }
 
 std::function<void()> Channel::getCallback(){

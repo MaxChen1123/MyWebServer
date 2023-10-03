@@ -9,9 +9,9 @@
 
 class Connection{
 private:
-    Channel* ch;
-    std::shared_ptr<Epoller> epoller;    
+    Channel* ch;   
 public:
-    Connection(Channel*,std::shared_ptr<Epoller>);
+    Connection(Channel*);
     void connect();
+    void setChannel(Epoller*);
 };

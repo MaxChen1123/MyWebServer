@@ -1,14 +1,12 @@
 #include"Connection.h"
 
-Connection::Connection(Channel* _ch,std::shared_ptr<Epoller> _epoller){
+Connection::Connection(Channel* _ch){
     ch = _ch;
-    epoller = _epoller;
-    ch->setCallback(std::move(std::bind(&Connection::connect, this)));
-    ch->putInEpoll();
+    ch->setCallback(std::bind(&Connection::connect, this));
 }
 
 void Connection::connect(){
-    char buf[1024];     //这个buf大小无所谓
+    char buf[1024];    
     printf("client fd %d connected\n", ch->getFd());
     while(true){    //由于使用非阻塞IO，读取客户端buffer，一次读取buf大小数据，直到全部读取完毕
         bzero(&buf, sizeof(buf));
@@ -27,10 +25,12 @@ void Connection::connect(){
             break;
         } else if(bytes_read == 0){  //EOF，客户端断开连接
             printf("EOF, client fd %d disconnected\n", ch->getFd());
-            // close(sockfd);   //关闭socket会自动将文件描述符从epoll树上移除
-            //deleteConnectionCallback(sock);
             break;
         }
     }
 
+}
+
+void Connection::setChannel(Epoller* _epoller){
+    ch->putInEpoll(_epoller);
 }

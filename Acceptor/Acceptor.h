@@ -10,11 +10,13 @@
 
 class Acceptor{
 public:
-    Acceptor(std::shared_ptr<Epoller> epoller);
+    Acceptor();
     void acceptConnection();
+    void setConnectionCallback(std::function<void(Socket*)> callback);
+    void setChannel(Epoller*);
 
 private:
-    std::shared_ptr<Epoller> epoller;
     std::unique_ptr<Socket> socket_p;
     Channel* acceptChannel;
+    std::function<void(Socket*)> connectionCallback;
 };

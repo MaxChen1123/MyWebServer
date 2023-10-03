@@ -14,12 +14,7 @@ Threadpool::Threadpool(int threadNum){
                     task=std::move(tasks.front());
                     tasks.pop();
                 }
-                try{
                 task();
-                }
-                catch(...){
-                    printf("something wrong here");
-                }
             }
         });};
 

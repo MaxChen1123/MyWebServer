@@ -9,16 +9,15 @@
 class Channel{
     private:
     int fd;
-    std::shared_ptr<Epoller> epoller;
     uint32_t event;
     std::function<void()> callback;
 
     public:
-    Channel(int,std::shared_ptr<Epoller>);
+    Channel(int);
     int getFd();
     void setCallback(std::function<void()>&&);
     std::function<void()> getCallback();
     void handleEvent();
     uint32_t getEvent();
-    void putInEpoll();
+    void putInEpoll(Epoller*);
 };
