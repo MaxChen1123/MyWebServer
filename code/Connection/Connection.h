@@ -6,12 +6,14 @@
 
 #include"../Channel/Channel.h"
 #include"../Epoller/Epoller.h"
+#include"../Buffer/Buffer.h"
 
 class Socket;
 class Connection{
 private:
     Channel* ch;
     Socket* sk;   
+    Buffer* buf;
 public:
     Connection(Channel*,Socket*);
     ~Connection();
