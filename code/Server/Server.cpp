@@ -7,7 +7,7 @@ Server::Server(){
     std::function<void(Socket*)> _cb=std::bind(&Server::connectionEstablished,this,_1);
     acceptor.get()->setConnectionCallback(_cb);
 
-    threadnum=3;
+    threadnum=static_cast<int>(std::thread::hardware_concurrency());
     threadpool=std::make_unique<Threadpool>(threadnum);
     for(int i=0;i<threadnum;i++){
         subReactors.emplace_back(std::make_unique<Epoller>());
