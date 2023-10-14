@@ -103,6 +103,10 @@
     "stdexcept": "cpp",
     "streambuf": "cpp",
     "thread": "cpp",
-    "typeinfo": "cpp"
-  }
+    "typeinfo": "cpp",
+    "condition_variable": "cpp",
+    "future": "cpp",
+    "mutex": "cpp"
+  },
+  "C_Cpp_Runner.msvcSecureNoWarnings": false
 }

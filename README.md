@@ -6,7 +6,7 @@
 - [x] 缓冲区 
 - [ ] 压力测试
 - [ ] CMake编译项目
-- [ ] 日志系统
+- [x] 日志系统
 - [ ] 定时器
 # 参考
 [30天自制C++服务器](https://github.com/yuesong-feng/30dayMakeCppServer)<br>

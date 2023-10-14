@@ -2,6 +2,6 @@
 
 
 int main(){ 
-    Server server;
+    Server server("./log/log.txt");
     return 0;
 }
